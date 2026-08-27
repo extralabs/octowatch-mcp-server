@@ -39,13 +39,14 @@ def slim_risk_row(row: dict[str, Any]) -> dict[str, Any]:
 
 
 def filter_by_alias_id(rows: list[Any], user_id: int | None) -> list[Any]:
+    """Keep rows for one person. Match AliasID only (never event ID)."""
     if user_id is None:
         return rows
     out = []
     for row in rows:
         if not isinstance(row, dict):
             continue
-        if row.get("AliasID") == user_id or row.get("ID") == user_id:
+        if row.get("AliasID") == user_id:
             out.append(row)
     return out
 
@@ -94,14 +95,18 @@ def format_activity_top(
     user_id: int | None = None,
 ) -> dict[str, Any]:
     items = data.get("List") or []
+    user_filter_applied = False
+    user_filter_note = None
     if user_id is not None:
-        # Activity Overall2 is usually aggregated apps/sites, not per-user rows.
-        # Keep as-is when no AliasID; filter if present.
-        filtered = [i for i in items if isinstance(i, dict) and i.get("AliasID") in (None, user_id)]
-        if any(isinstance(i, dict) and i.get("AliasID") is not None for i in items):
+        has_alias = any(isinstance(i, dict) and i.get("AliasID") is not None for i in items)
+        if has_alias:
             items = [i for i in items if isinstance(i, dict) and i.get("AliasID") == user_id]
+            user_filter_applied = True
         else:
-            items = filtered if filtered else items
+            user_filter_note = (
+                "user_id ignored: Activity/Overall2 rows are tenant-wide "
+                "(no AliasID on this response)"
+            )
 
     apps: list[dict[str, Any]] = []
     sites: list[dict[str, Any]] = []
@@ -128,6 +133,8 @@ def format_activity_top(
         "sites": sites[:top_n],
         "total_apps": len(apps),
         "total_sites": len(sites),
+        "user_filter_applied": user_filter_applied,
+        "user_filter_note": user_filter_note,
     }
 
 

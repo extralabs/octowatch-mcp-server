@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from octowatch_mcp.formatters import (
     analytics_risks_by_user,
+    filter_by_alias_id,
     format_activity_top,
     format_idle_summary,
     format_productivity_rollup,
@@ -12,6 +13,17 @@ from octowatch_mcp.formatters import (
     summarize_risks_page,
 )
 from octowatch_mcp.report_types import label_report_types
+
+
+def test_filter_by_alias_id_ignores_event_id() -> None:
+    rows = [
+        {"ID": 8, "AliasID": 10, "AliasName": "JULIAN"},
+        {"ID": 22615, "AliasID": 8, "AliasName": "Pc abajo"},
+    ]
+    # Must not match risk/event ID=8 — only AliasID=8
+    out = filter_by_alias_id(rows, 8)
+    assert len(out) == 1
+    assert out[0]["AliasName"] == "Pc abajo"
 
 
 def test_seconds_hms() -> None:
