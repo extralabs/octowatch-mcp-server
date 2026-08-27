@@ -18,7 +18,7 @@ Python MCP SDK **v2** (`MCPServer`). Built for SecOps and managers — and as op
 
 ## Status
 
-Alpha (`v0.3.0`): read-only coverage of Cloud **console** APIs (analytics, monitoring lists, dashboard, chrono, directory, account Gets). See [docs/API.md](docs/API.md) gap matrix or tool `list_api_coverage`.
+Alpha (`v0.4.0`): read-only coverage of Cloud **console** APIs (analytics, monitoring lists, dashboard, chrono, directory, account Gets). See [docs/API.md](docs/API.md) gap matrix or tool `list_api_coverage`.
 
 ### Core tools
 
