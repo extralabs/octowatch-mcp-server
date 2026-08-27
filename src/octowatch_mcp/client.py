@@ -10,7 +10,9 @@ from __future__ import annotations
 import threading
 import time
 from datetime import datetime
-from typing import Any, Self
+from typing import Any
+
+from typing_extensions import Self
 from urllib.parse import quote
 
 import httpx
