@@ -2,7 +2,7 @@
 # Already submitted: Glama, mcpservers.org, mcpfind.org. Skipping mcp.so (paid).
 
 $repo = "https://github.com/extralabs/octowatch-mcp-server"
-$blurb = "Read-only OctoWatch DLP Cloud MCP; runs locally; demo credentials or your console login."
+$blurb = "Read-only OctoWatch DLP Cloud (octowatchdlp.com) MCP; runs locally; demo credentials or your console login."
 
 Write-Host "Repo:  $repo"
 Write-Host "Blurb: $blurb"

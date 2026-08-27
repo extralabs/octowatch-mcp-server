@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.extralabs/octowatch-mcp",
   "title": "OctoWatch DLP",
-  "description": "Read-only OctoWatch DLP Cloud MCP: risks, idle time, productivity, monitoring.",
+  "description": "OctoWatch DLP Cloud (octowatchdlp) read-only MCP: risks, idle, productivity, monitoring.",
   "websiteUrl": "https://octowatchdlp.com/",
   "repository": {
     "url": "https://github.com/extralabs/octowatch-mcp-server",

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- SEO / discovery: richer PyPI keywords & classifiers; README H1 + lead use **OctoWatch DLP** / `octowatchdlp.com` (brand disambiguation); align Registry / Cursor plugin blurbs; Homepage / websiteUrl stay on the **product** site (`octowatchdlp.com`).
+- [docs/distribution.md](docs/distribution.md): GitHub About checklist (Website was empty — critical for crawlers) + [`scripts/sync-github-about.ps1`](scripts/sync-github-about.ps1).
+
 ### Added
 
 - CI: after PyPI on tag `v*`, publish to the official MCP Registry via `mcp-publisher` + GitHub OIDC ([`.github/workflows/publish.yml`](.github/workflows/publish.yml)).
@@ -14,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [docs/distribution.md](docs/distribution.md): directory rollout, auth for catalogs, deferred hosted channels (Smithery / remote Connectors).
 - README: **Where to find us** + clearer demo vs tenant credentials.
 - Directory submits recorded: [Glama](https://glama.ai/), [mcpservers.org](https://mcpservers.org/), [mcpfind.org](https://mcpfind.org/), [mcpmarket.com](https://mcpmarket.com/); mcp.so skipped (paid).
-- Open Plugins: root [`.mcp.json`](.mcp.json) for [cursor.directory](https://cursor.directory) auto-detect (must be on GitHub `main`).
+- Open Plugins: root [`.mcp.json`](../.mcp.json) for [cursor.directory](https://cursor.directory) auto-detect (must be on GitHub `main`).
 
 ## [0.5.1] - 2026-08-27
 

@@ -18,6 +18,7 @@ Hosts substitute env / plugin variables locally. Passwords are not sent to ExtrL
 |---------|------|-----------------|
 | [PyPI `octowatch-mcp`](https://pypi.org/project/octowatch-mcp/) | Install artifact | Publish on tag `v*` ([`publish.yml`](../.github/workflows/publish.yml)) |
 | [Official MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.extralabs/octowatch-mcp) `io.github.extralabs/octowatch-mcp` | Canonical metadata | Same tag job; see [registry.md](registry.md) |
+| GitHub About | SEO / crawlers | **Website** + **Description** + **Topics** — see [GitHub About (critical)](#github-about-critical) |
 | GitHub topics | Discovery crawlers | `mcp`, `mcp-server`, `model-context-protocol`, `dlp`, `employee-monitoring`, `python`, `security`, `octowatch` |
 | [PulseMCP](https://www.pulsemcp.com/) | Directory (often syncs Registry) | Submissions paused mid-Aug 2026; re-check search for `octowatch` after ingestion resumes |
 | [Glama](https://glama.ai/) | Directory + score badges | **Submitted** (2026-08-27); claim listing when card appears; topics help auto-index |
@@ -31,7 +32,26 @@ Hosts substitute env / plugin variables locally. Passwords are not sent to ExtrL
 
 Blurb for forms (keep identical):
 
-> Read-only OctoWatch DLP Cloud MCP; runs locally; demo credentials or your console login.
+> Read-only OctoWatch DLP Cloud (octowatchdlp.com) MCP; runs locally; demo credentials or your console login.
+
+### GitHub About (critical)
+
+GitHub **About** fields are not in git — they live on the repo settings API. Empty **Website** hurts SEO (Google/Bing use it as the canonical outbound link).
+
+| Field | Value |
+|-------|--------|
+| Description | `Read-only MCP server for OctoWatch DLP Cloud (octowatchdlp.com) - risks, idle time, productivity, and employee monitoring for Cursor, Claude, and VS Code.` |
+| Website | `https://octowatchdlp.com/` (product first; PyPI stays in badges / install docs) |
+| Topics | `mcp`, `mcp-server`, `model-context-protocol`, `dlp`, `employee-monitoring`, `python`, `security`, `octowatch` |
+
+One-shot sync (needs `gh` auth or `GITHUB_TOKEN` with `repo` scope):
+
+```powershell
+# scripts/sync-github-about.ps1
+./scripts/sync-github-about.ps1
+```
+
+Or manually: repo → ⚙️ → scroll to **About** → pencil.
 
 ## Deferred (needs hosting or heavy packaging)
 
@@ -49,7 +69,7 @@ Local `octowatch-mcp --transport streamable-http` on **localhost** remains fine 
 ## Maintainer checklist (each discovery push)
 
 1. Confirm Registry + PyPI version match.
-2. Topics still set on GitHub (`gh api repos/extralabs/octowatch-mcp-server/topics`).
+2. GitHub **About**: Website set (not empty), description mentions **OctoWatch DLP** / `octowatchdlp.com`, topics still set (`./scripts/sync-github-about.ps1` or UI pencil).
 3. Confirm Glama / mcpservers.org / mcpfind.org / mcpmarket.com cards went live; claim Glama if needed. Skip **mcp.so** while listing is paid.
 4. **cursor.directory** scans GitHub `HEAD` for Open Plugins components ([parser](https://github.com/cursor/community-plugins)): root `.mcp.json` or `mcp.json`, plus optional `.cursor-plugin/plugin.json`. Files must be **pushed** before [plugins/new](https://cursor.directory/plugins/new) works. Helper: [`scripts/open-directory-submits.ps1`](../scripts/open-directory-submits.ps1).
 5. Cursor Marketplace: after plugin changes, re-submit for review. Local smoke: junction/symlink repo → `~/.cursor/plugins/local/octowatch`, then **Developer: Reload Window**.
@@ -69,8 +89,8 @@ Local `octowatch-mcp --transport streamable-http` on **localhost** remains fine 
 |-------|--------|
 | GitHub URL | `https://github.com/extralabs/octowatch-mcp-server` |
 | Name | OctoWatch DLP / `octowatch-mcp` |
-| Description | Read-only OctoWatch DLP Cloud MCP; runs locally; demo credentials or your console login. |
-| Tags | `mcp`, `dlp`, `security`, `monitoring`, `python` |
+| Description | Read-only OctoWatch DLP Cloud (octowatchdlp.com) MCP; runs locally; demo credentials or your console login. |
+| Tags | `mcp`, `dlp`, `security`, `employee-monitoring`, `octowatchdlp`, `python` |
 | Install | `uvx octowatch-mcp` or `pip install octowatch-mcp` |
 | Env | `OCTOWATCH_EMAIL`, `OCTOWATCH_PASSWORD` (secret), optional `OCTOWATCH_API_BASE` |
 | Registry | `io.github.extralabs/octowatch-mcp` |

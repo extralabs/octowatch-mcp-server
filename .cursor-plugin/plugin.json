@@ -2,7 +2,7 @@
   "name": "octowatch",
   "displayName": "OctoWatch DLP",
   "version": "0.5.1",
-  "description": "Read-only OctoWatch DLP Cloud MCP: risks, idle time, productivity, and monitoring. Runs locally; use demo credentials or your console login.",
+  "description": "Read-only OctoWatch DLP Cloud (octowatchdlp.com) MCP: risks, idle time, productivity, and employee monitoring. Runs locally; demo or your console login.",
   "author": {
     "name": "KOLIBRI LLC",
     "email": "support@octowatchdlp.com"
@@ -12,14 +12,16 @@
   "license": "MIT",
   "keywords": [
     "mcp",
+    "mcp-server",
     "octowatch",
+    "octowatch-dlp",
     "dlp",
     "security",
     "employee-monitoring",
     "productivity"
   ],
   "category": "security",
-  "tags": ["mcp", "dlp", "monitoring"],
+  "tags": ["mcp", "dlp", "employee-monitoring", "octowatchdlp"],
   "mcpServers": "mcp.json",
   "variables": {
     "type": "object",

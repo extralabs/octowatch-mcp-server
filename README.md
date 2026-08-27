@@ -1,4 +1,6 @@
-# octowatch-mcp
+# OctoWatch DLP MCP Server
+
+PyPI package: [`octowatch-mcp`](https://pypi.org/project/octowatch-mcp/) · product: [octowatchdlp.com](https://octowatchdlp.com/) (not related to other products named “OctoWatch”).
 
 [![PyPI](https://img.shields.io/pypi/v/octowatch-mcp.svg)](https://pypi.org/project/octowatch-mcp/)
 [![Python](https://img.shields.io/pypi/pyversions/octowatch-mcp.svg)](https://pypi.org/project/octowatch-mcp/)
@@ -10,7 +12,7 @@
 [![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Server-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=octowatch&config=%7B%22command%22%3A%22octowatch-mcp%22%2C%22env%22%3A%7B%22OCTOWATCH_API_BASE%22%3A%22https%3A%2F%2Fcloud.octowatchdlp.com%22%2C%22OCTOWATCH_EMAIL%22%3A%22demo%40octowatchdlp.com%22%2C%22OCTOWATCH_PASSWORD%22%3A%22demo%22%7D%7D)
 [![Install in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Install_Server-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=octowatch&config=%7B%22command%22%3A%22octowatch-mcp%22%2C%22env%22%3A%7B%22OCTOWATCH_API_BASE%22%3A%22https%3A%2F%2Fcloud.octowatchdlp.com%22%2C%22OCTOWATCH_EMAIL%22%3A%22demo%40octowatchdlp.com%22%2C%22OCTOWATCH_PASSWORD%22%3A%22demo%22%7D%7D&quality=insiders)
 
-Read-only [MCP](https://modelcontextprotocol.io/) server for **[OctoWatch DLP Cloud](https://octowatchdlp.com/)** — ask Cursor, Claude, or VS Code about risks, idle time, productivity, and monitoring in plain language.
+Read-only [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for **[OctoWatch DLP Cloud](https://octowatchdlp.com/)** employee monitoring and data-loss prevention — ask Cursor, Claude, or VS Code about risks, idle time, productivity, and monitoring in plain language.
 
 <!-- mcp-name: io.github.extralabs/octowatch-mcp -->
 
