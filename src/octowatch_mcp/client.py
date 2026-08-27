@@ -11,11 +11,10 @@ import threading
 import time
 from datetime import datetime
 from typing import Any
-
-from typing_extensions import Self
 from urllib.parse import quote
 
 import httpx
+from typing_extensions import Self
 
 from octowatch_mcp.config import Settings, get_settings
 from octowatch_mcp.filters import (
@@ -328,9 +327,8 @@ class OctoWatchClient:
         with self._lock:
             now = time.time()
             ttl = self.USERS_GROUPS_CACHE_TTL
-            fresh = (
-                self._users_groups_cache is not None
-                and (ttl <= 0 or (now - self._users_groups_cached_at) < ttl)
+            fresh = self._users_groups_cache is not None and (
+                ttl <= 0 or (now - self._users_groups_cached_at) < ttl
             )
             if not force_refresh and fresh:
                 return self._users_groups_cache
@@ -361,8 +359,7 @@ class OctoWatchClient:
         path = DIRECTORY_SOURCES.get(source)
         if not path:
             raise OctoWatchAPIError(
-                f"Unknown directory source={source!r}; "
-                f"choose from {sorted(DIRECTORY_SOURCES)}"
+                f"Unknown directory source={source!r}; choose from {sorted(DIRECTORY_SOURCES)}"
             )
         if source == "users_groups":
             return self.get_users_groups(force_refresh=force_refresh)
@@ -383,8 +380,7 @@ class OctoWatchClient:
         path = ACCOUNT_READONLY_SOURCES.get(source)
         if not path:
             raise OctoWatchAPIError(
-                f"Unknown account source={source!r}; "
-                f"choose from {sorted(ACCOUNT_READONLY_SOURCES)}"
+                f"Unknown account source={source!r}; choose from {sorted(ACCOUNT_READONLY_SOURCES)}"
             )
         hdrs = dict(extra_headers or {})
 
@@ -399,9 +395,7 @@ class OctoWatchClient:
         elif source == "timetable":
             # GetProfileTimeTable needs ProfileTimeTableID
             if profile_id is None:
-                raise OctoWatchAPIError(
-                    "source=timetable requires profile_id (ProfileTimeTableID)"
-                )
+                raise OctoWatchAPIError("source=timetable requires profile_id (ProfileTimeTableID)")
             hdrs["ProfileTimeTableID"] = str(profile_id)
         elif source == "rules":
             if profile_id is None:
@@ -416,8 +410,7 @@ class OctoWatchClient:
         elif source == "computer_settings":
             if profile_id is None:
                 raise OctoWatchAPIError(
-                    "source=computer_settings requires profile_id "
-                    "(ProfileComputerSettingsID)"
+                    "source=computer_settings requires profile_id (ProfileComputerSettingsID)"
                 )
             hdrs["ProfileComputerSettingsID"] = str(profile_id)
 
@@ -443,8 +436,7 @@ class OctoWatchClient:
         """User/computer detail Gets — same headers as my-analytics SPA."""
         if source not in USER_INFO_SOURCES:
             raise OctoWatchAPIError(
-                f"Unknown user_info source={source!r}; "
-                f"choose from {sorted(USER_INFO_SOURCES)}"
+                f"Unknown user_info source={source!r}; choose from {sorted(USER_INFO_SOURCES)}"
             )
         method, path = USER_INFO_SOURCES[source]
         hdrs: dict[str, str] = {}
@@ -772,8 +764,7 @@ class OctoWatchClient:
         path = DASHBOARD_WIDGETS.get(widget)
         if not path:
             raise OctoWatchAPIError(
-                f"Unknown dashboard widget={widget!r}; "
-                f"choose from {sorted(DASHBOARD_WIDGETS)}"
+                f"Unknown dashboard widget={widget!r}; choose from {sorted(DASHBOARD_WIDGETS)}"
             )
         extra: dict[str, str] = {}
         if widget == "screens":
@@ -887,8 +878,7 @@ class OctoWatchClient:
         """
         if source not in STREAM_META_SOURCES:
             raise OctoWatchAPIError(
-                f"Unknown stream source={source!r}; "
-                f"choose from {sorted(STREAM_META_SOURCES)}"
+                f"Unknown stream source={source!r}; choose from {sorted(STREAM_META_SOURCES)}"
             )
         path = STREAM_META_SOURCES[source]
 

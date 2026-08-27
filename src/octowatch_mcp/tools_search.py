@@ -18,9 +18,17 @@ SEARCH_KIND_SPECS: list[tuple[str, str | None, tuple[str, ...]]] = [
     ("Apps", "app,wt", ("Name", "WindowTitle")),
     ("Keystrokes", "app,keystrokestext", ("Activity", "Text")),
     ("Clipboard1", "app,clipboardtext", ("Activity", "ClipboardText")),
-    ("Screens", "ocr,url,wt", ("Activity", "AppExeOrURL", "AppExe", "WindowTitle", "RecognitionResult")),
+    (
+        "Screens",
+        "ocr,url,wt",
+        ("Activity", "AppExeOrURL", "AppExe", "WindowTitle", "RecognitionResult"),
+    ),
     ("Messengers", "chatstext", ("Body", "Text", "Sender", "Recipient")),
-    ("Mail", "chatstext,sender,recipient,subject", ("Text", "Body", "Sender", "Recipient", "Subject")),
+    (
+        "Mail",
+        "chatstext,sender,recipient,subject",
+        ("Text", "Body", "Sender", "Recipient", "Subject"),
+    ),
     ("WebcamAudio", "ar,wt", ("WindowTitle", "RecognitionResult")),
     ("Files", "files_file", ("SrcPath", "ProcessName", "Name")),
     ("Prints", "prints_file", ("DocumentName", "Printer")),
@@ -176,9 +184,7 @@ def execute_tools_search(
         }
 
     with ThreadPoolExecutor(max_workers=min(max_workers, len(specs) or 1)) as pool:
-        futures = {
-            pool.submit(_one, kind, fo, fields): kind for kind, fo, fields in specs
-        }
+        futures = {pool.submit(_one, kind, fo, fields): kind for kind, fo, fields in specs}
         for fut in as_completed(futures):
             kind = futures[fut]
             try:
@@ -194,9 +200,7 @@ def execute_tools_search(
                         "total_records": None,
                         "start_from": None,
                         "num_records": None,
-                        "filter_objects": next(
-                            (fo for k, fo, _ in specs if k == kind), None
-                        ),
+                        "filter_objects": next((fo for k, fo, _ in specs if k == kind), None),
                     }
                 )
 

@@ -69,10 +69,13 @@ def test_analytics_risks_by_user() -> None:
         ]
     )
     assert rows[0]["count"] == 558
-    assert analytics_risks_by_user(
-        [{"Name": "JULIAN", "ID": 10, "Value": 558}],
-        user_id=11,
-    ) == []
+    assert (
+        analytics_risks_by_user(
+            [{"Name": "JULIAN", "ID": 10, "Value": 558}],
+            user_id=11,
+        )
+        == []
+    )
 
 
 def test_format_activity_top() -> None:

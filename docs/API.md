@@ -1,15 +1,22 @@
 # API notes (MCP coverage audit)
 
-Prefer the interactive UI at https://app.octowatchdlp.com/api/ for the full catalog.  
-Help catalog: https://cloud.octowatchdlp.com/Help (~340 endpoints).
+**As of package `octowatch-mcp` 0.5.x.** This is an MCP **coverage audit** against the Cloud web console (read-only) — not a full REST/OpenAPI mirror.
 
-This document is the **public gap matrix** for `octowatch-mcp` vs the Cloud **web console** (read-only).
+Canonical product / REST sources (prefer these for endpoint catalogs and UI how-to):
+
+- Product: https://octowatchdlp.com/
+- Product docs: https://octowatchdlp.com/docs/
+- Web Console: https://app.octowatchdlp.com/
+- In-app API catalog: https://app.octowatchdlp.com/api/
+- Help catalog (secondary): https://cloud.octowatchdlp.com/Help
 
 ## Hosts
 
 | URL | Role |
 |-----|------|
-| `https://app.octowatchdlp.com` | Web Console SPA |
+| `https://octowatchdlp.com/` | Product home |
+| `https://octowatchdlp.com/docs/` | Product documentation |
+| `https://app.octowatchdlp.com/` | Web Console SPA |
 | `https://app.octowatchdlp.com/api/` | In-app API docs (SPA route) |
 | `https://cloud.octowatchdlp.com` | REST API (`spm-config.json` → `serverBase`) |
 | `https://cloud.octowatchdlp.com/Help` | ASP.NET Web API Help |

@@ -41,10 +41,7 @@ def test_build_neither_is_root() -> None:
 def test_compact_strips_blob_and_caps_list() -> None:
     data = {
         "TotalRecords": 50,
-        "List": [
-            {"AliasID": i, "Thumbnail": "AAAA" * 100, "Text": "x" * 1000}
-            for i in range(20)
-        ],
+        "List": [{"AliasID": i, "Thumbnail": "AAAA" * 100, "Text": "x" * 1000} for i in range(20)],
     }
     out = compact_api_payload(data, list_cap=5, text_max=50)
     assert out["_truncated"] is True

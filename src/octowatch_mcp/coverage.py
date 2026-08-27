@@ -9,8 +9,18 @@ from typing import Any
 
 COVERAGE: list[dict[str, str]] = [
     # Auth
-    {"area": "Auth", "endpoint": "GET /api/Access/login-jwt", "tool": "octowatch_whoami", "status": "covered"},
-    {"area": "Auth", "endpoint": "GET /api/Access/refresh-token", "tool": "(client)", "status": "covered"},
+    {
+        "area": "Auth",
+        "endpoint": "GET /api/Access/login-jwt",
+        "tool": "octowatch_whoami",
+        "status": "covered",
+    },
+    {
+        "area": "Auth",
+        "endpoint": "GET /api/Access/refresh-token",
+        "tool": "(client)",
+        "status": "covered",
+    },
     # Directory
     {
         "area": "Directory",

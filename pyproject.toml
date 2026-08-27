@@ -1,6 +1,6 @@
 [project]
 name = "octowatch-mcp"
-version = "0.4.0"
+version = "0.5.0"
 description = "Read-only MCP server for OctoWatch DLP Cloud (console analytics, monitoring, risks, productivity)"
 readme = "README.md"
 license = { text = "MIT" }
@@ -28,11 +28,13 @@ dev = ["pytest>=8.0", "ruff>=0.6"]
 octowatch-mcp = "octowatch_mcp.server:main"
 
 [project.urls]
-Homepage = "https://octowatchdlp.com"
+Homepage = "https://octowatchdlp.com/"
 Documentation = "https://octowatchdlp.com/docs/"
+Console = "https://app.octowatchdlp.com/"
 API = "https://app.octowatchdlp.com/api/"
 Repository = "https://github.com/extralabs/octowatch-mcp-server"
 Issues = "https://github.com/extralabs/octowatch-mcp-server/issues"
+Changelog = "https://github.com/extralabs/octowatch-mcp-server/blob/main/CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling"]
