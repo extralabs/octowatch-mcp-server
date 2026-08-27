@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.1] - 2026-08-27
+
+### Added
+
+- Official MCP Registry prep: [`server.json`](server.json), `<!-- mcp-name: io.github.extralabs/octowatch-mcp -->` in README, [docs/registry.md](docs/registry.md).
+
 ### Changed
 
 - Documentation restructure: README funnel, `docs/` index, host install + credentials walkthrough, tool reference, security and contributing guides (MCP-focused; product docs and `/api/` remain canonical for console/REST).

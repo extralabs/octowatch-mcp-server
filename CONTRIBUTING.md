@@ -55,14 +55,16 @@ Product links to keep current:
 
 ## Release (maintainers)
 
-Publishing to PyPI uses Trusted Publisher on a version tag. The version in `pyproject.toml` must match the tag (`0.5.0` → `v0.5.0`):
+Publishing to PyPI uses Trusted Publisher on a version tag. The version in `pyproject.toml` must match the tag (`0.5.1` → `v0.5.1`):
 
 ```bash
-git tag v0.5.0
-git push origin v0.5.0
+git tag v0.5.1
+git push origin v0.5.1
 ```
 
 Update [CHANGELOG.md](CHANGELOG.md) before tagging.
+
+Keep [`server.json`](server.json) versions in sync with `pyproject.toml`. After the PyPI release is live (README must include the `mcp-name` HTML comment), publish metadata to the official MCP Registry — see [docs/registry.md](docs/registry.md).
 
 ## License
 

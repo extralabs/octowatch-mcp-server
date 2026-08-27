@@ -12,6 +12,8 @@
 
 Read-only [MCP](https://modelcontextprotocol.io/) server for **[OctoWatch DLP Cloud](https://octowatchdlp.com/)** — ask Cursor, Claude, or VS Code about risks, idle time, productivity, and monitoring in plain language.
 
+<!-- mcp-name: io.github.extralabs/octowatch-mcp -->
+
 - Product: [octowatchdlp.com](https://octowatchdlp.com/)
 - Product docs: [octowatchdlp.com/docs/](https://octowatchdlp.com/docs/)
 - Web Console: [app.octowatchdlp.com](https://app.octowatchdlp.com/)
@@ -23,7 +25,7 @@ Python MCP SDK **v2** (`MCPServer`). Built for SecOps and managers — open-sour
 
 ## Status
 
-**Alpha** (`v0.5.0`). APIs and tool shapes may change; pin a PyPI version in production configs.
+**Alpha** (`v0.5.1`). APIs and tool shapes may change; pin a PyPI version in production configs.
 
 Tool failures return MCP `is_error` (`ToolError`). All tools advertise `read_only_hint`.
 
@@ -204,6 +206,7 @@ Prefer `period=today|yesterday|last_7_days|last_30_days`, or `date_from` / `date
 | [docs/MCP.md](docs/MCP.md) | Protocol, resources, prompts |
 | [docs/API.md](docs/API.md) | MCP coverage audit (not a full REST mirror) |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Common failures |
+| [docs/registry.md](docs/registry.md) | Official MCP Registry (`server.json`) |
 
 ### Product & console
 
@@ -214,7 +217,7 @@ Prefer `period=today|yesterday|last_7_days|last_30_days`, or `date_from` / `date
 
 ## Roadmap
 
-Planned (not scheduled): tighter payload budgets, client-side rate limits, argument completions, server icon, optional MCP Apps UI, tool-routing evals, MCP registry listing clarity. See [docs/MCP.md](docs/MCP.md) for the current protocol surface.
+Planned (not scheduled): tighter payload budgets, client-side rate limits, argument completions, server icon, optional MCP Apps UI, tool-routing evals. Registry metadata: [docs/registry.md](docs/registry.md). Protocol surface: [docs/MCP.md](docs/MCP.md).
 
 ## Contributing
 

@@ -22,6 +22,7 @@ Repo docs **link out** to those sources. Do not treat `docs/API.md` as a second 
 | [MCP.md](MCP.md) | Protocol, resources, prompts, transports, toolsets |
 | [API.md](API.md) | MCP **coverage audit** vs console (gotchas for the client) |
 | [troubleshooting.md](troubleshooting.md) | Auth, empty results, common confusions |
+| [registry.md](registry.md) | Official MCP Registry publish (`server.json`) |
 
 Start here if you are new: [../README.md](../README.md) → [hosts.md](hosts.md) → try prompts → [TOOLS.md](TOOLS.md) when routing matters.
 

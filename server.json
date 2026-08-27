@@ -1,0 +1,56 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.extralabs/octowatch-mcp",
+  "title": "OctoWatch DLP",
+  "description": "Read-only OctoWatch DLP Cloud MCP: risks, idle time, productivity, monitoring.",
+  "websiteUrl": "https://octowatchdlp.com/",
+  "repository": {
+    "url": "https://github.com/extralabs/octowatch-mcp-server",
+    "source": "github"
+  },
+  "version": "0.5.1",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "octowatch-mcp",
+      "version": "0.5.1",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "OCTOWATCH_API_BASE",
+          "description": "Cloud API host (serverBase). Default: public cloud.",
+          "isRequired": false,
+          "format": "string",
+          "default": "https://cloud.octowatchdlp.com"
+        },
+        {
+          "name": "OCTOWATCH_EMAIL",
+          "description": "Console operator email. Demo default works for try-out.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false,
+          "default": "demo@octowatchdlp.com"
+        },
+        {
+          "name": "OCTOWATCH_PASSWORD",
+          "description": "Console password. Use a least-privilege operator for real tenants.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": true,
+          "default": "demo"
+        },
+        {
+          "name": "OCTOWATCH_TOOLSETS",
+          "description": "Tool filter: all | core | console (console includes core).",
+          "isRequired": false,
+          "format": "string",
+          "default": "all",
+          "choices": ["all", "core", "console"]
+        }
+      ]
+    }
+  ]
+}
