@@ -1,6 +1,6 @@
-# API notes (from live demo probe)
+# API notes (from live demo / tenant probes)
 
-Captured against Cloud demo while scaffolding this repo. Prefer the interactive UI at https://app.octowatchdlp.com/api/ for full catalog.
+Prefer the interactive UI at https://app.octowatchdlp.com/api/ for full catalog.
 
 ## Hosts
 
@@ -26,8 +26,6 @@ Authorization: Bearer <Token>   # on data calls
 
 ## Users / groups filter body
 
-Used by Risks, Alerts, Activity, TimeSheet, Productivity, Analytics, Dashboard POSTs:
-
 ```json
 [{ "NodeType": -666666, "UserID": -666666 }]
 ```
@@ -36,7 +34,7 @@ Used by Risks, Alerts, Activity, TimeSheet, Productivity, Analytics, Dashboard P
 |----------|---------|
 | `-666666` | Root (all) |
 | `1` | Group (`UserID` = group id) |
-| `2` | User — **not reliable** in probe (SQL errors); prefer group/root + client filter |
+| `2` | User — unreliable in probes; MCP filters by `AliasID` client-side |
 
 ## Headers for period POSTs
 
@@ -51,20 +49,33 @@ NumRows: 100
 HideHidden: False
 ```
 
-## Endpoints used by MCP v0.1
+**MCP date rule:** date-only `YYYY-MM-DD` for `date_to` is sent as end of day `23:59:59` (same-day queries must not become `00:00:00`–`00:00:00`).
+
+## Endpoints used by MCP v0.2
 
 | Tool area | Method | Path |
 |-----------|--------|------|
-| Risks | POST | `/api/Risks/Overall2` |
+| Risks detail | POST | `/api/Risks/Overall2` |
+| Risks by user (summary) | POST | `/api/Analytics/Overall` → `Risks` |
 | Anomalies | POST | `/api/Alerts/Overall2` |
 | Users/groups | GET | `/api/Edit/GetUsersGroups2` |
 | Activity | POST | `/api/Activity/Overall2` |
 | Timesheet | POST | `/api/TimeSheet/Overall2` |
-| Productivity | POST | `/api/Productivity/Overall3` |
+| Productivity / idle | POST | `/api/Productivity/Overall3` |
 | Productivity totals | POST | `/api/Productivity/GetStats` |
 | Analytics rollup | POST | `/api/Analytics/Overall` |
 | Report settings | GET | `/api/Account/GetReports` |
 | Background jobs | GET | `/api/Edit/GetProcessingTasks` |
+
+### Risks summary behavior
+
+- `by_user`: from `Analytics/Overall` (accurate totals without paging all risk rows).
+- `by_rule` / `by_day` / `sample`: from one `Risks/Overall2` page unless `fetch_all=true` (cap 2000).
+
+### Idle vs anomalies
+
+- **Idle duration** → productivity `InactiveTime` (`get_idle_summary`).
+- **Formal deviations** → `Alerts/Overall2` (`list_anomalies`). Empty Alerts with a 24h timetable is expected.
 
 ## Demo tree (sample)
 

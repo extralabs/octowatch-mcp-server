@@ -8,15 +8,25 @@ Docs UI: https://app.octowatchdlp.com/api/  ·  Host: https://cloud.octowatchdlp
 from __future__ import annotations
 
 import time
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any, Self
 from urllib.parse import quote
 
 import httpx
 
 from octowatch_mcp.config import ROOT_FILTER, Settings, get_settings
+from octowatch_mcp.period import DATE_FMT, parse_datetime, resolve_period
 
-DATE_FMT = "%Y-%m-%d %H:%M:%S"
+__all__ = [
+    "DATE_FMT",
+    "OctoWatchAPIError",
+    "OctoWatchClient",
+    "parse_datetime",
+    "resolve_period",
+    "users_filter_all",
+    "users_filter_for_group",
+]
+
 
 
 class OctoWatchAPIError(RuntimeError):
@@ -204,6 +214,45 @@ class OctoWatchClient:
             extra_headers={"Offset": str(offset), "NumRows": str(num_rows)},
         )
 
+    def risks_pages(
+        self,
+        *,
+        date_from: datetime | None = None,
+        date_to: datetime | None = None,
+        users_filter: list[dict[str, int]] | None = None,
+        page_size: int = 500,
+        max_rows: int = 2000,
+    ) -> dict[str, Any]:
+        """Fetch Risks/Overall2 pages until done or max_rows."""
+        page_size = max(1, min(page_size, 500))
+        offset = 0
+        merged: list[Any] = []
+        total = None
+        while offset < max_rows:
+            chunk = self.risks(
+                date_from=date_from,
+                date_to=date_to,
+                users_filter=users_filter,
+                offset=offset,
+                num_rows=min(page_size, max_rows - offset),
+            )
+            if not isinstance(chunk, dict):
+                break
+            if total is None:
+                total = int(chunk.get("TotalRecords") or 0)
+            rows = chunk.get("List") or []
+            merged.extend(rows)
+            if not rows or len(merged) >= (total or 0) or len(rows) < page_size:
+                break
+            offset += len(rows)
+        return {
+            "List": merged,
+            "TotalRecords": total if total is not None else len(merged),
+            "StartFrom": 0,
+            "NumRecords": len(merged),
+            "capped": bool(total is not None and len(merged) < total),
+        }
+
     def anomalies(
         self,
         *,
@@ -294,39 +343,6 @@ class OctoWatchClient:
             date_to=date_to,
             users_filter=users_filter,
         )
-
-
-def resolve_period(
-    date_from: datetime | None,
-    date_to: datetime | None,
-    default_days: int,
-) -> tuple[datetime, datetime]:
-    # API DateFrom/DateTo are local-naive (yyyy-MM-dd HH:mm:ss), not UTC.
-    end = date_to or datetime.now().astimezone().replace(
-        hour=23, minute=59, second=59, microsecond=0, tzinfo=None
-    )
-    start = date_from or (end - timedelta(days=default_days)).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    return start, end
-
-
-def parse_datetime(value: str | None) -> datetime | None:
-    if not value:
-        return None
-    value = value.strip()
-    for fmt in (DATE_FMT, "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d"):
-        try:
-            # Naive on purpose: matches OctoWatch local-time headers.
-            dt = datetime.strptime(value, fmt)  # noqa: DTZ007
-            if fmt == "%Y-%m-%d":
-                return dt.replace(hour=0, minute=0, second=0)
-            return dt
-        except ValueError:
-            continue
-    raise ValueError(
-        f"Invalid datetime '{value}'. Use 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS'."
-    )
 
 
 def users_filter_for_group(group_id: int) -> list[dict[str, int]]:

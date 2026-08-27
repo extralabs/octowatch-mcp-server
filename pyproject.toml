@@ -1,6 +1,6 @@
 [project]
 name = "octowatch-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "Read-only MCP server for OctoWatch DLP Cloud (Risks, Anomalies, users, activity, productivity, reports)"
 readme = "README.md"
 license = { text = "MIT" }
@@ -41,3 +41,6 @@ packages = ["src/octowatch_mcp"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["DTZ001"]
