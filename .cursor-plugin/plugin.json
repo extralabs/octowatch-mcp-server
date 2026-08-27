@@ -1,0 +1,48 @@
+{
+  "name": "octowatch",
+  "displayName": "OctoWatch DLP",
+  "version": "0.5.1",
+  "description": "Read-only OctoWatch DLP Cloud MCP: risks, idle time, productivity, and monitoring. Runs locally; use demo credentials or your console login.",
+  "author": {
+    "name": "KOLIBRI LLC",
+    "email": "support@octowatchdlp.com"
+  },
+  "homepage": "https://octowatchdlp.com/",
+  "repository": "https://github.com/extralabs/octowatch-mcp-server",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "octowatch",
+    "dlp",
+    "security",
+    "employee-monitoring",
+    "productivity"
+  ],
+  "category": "security",
+  "tags": ["mcp", "dlp", "monitoring"],
+  "mcpServers": "mcp.json",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "OCTOWATCH_API_BASE": {
+        "type": "string",
+        "title": "API base URL",
+        "description": "Cloud API host (serverBase). Leave default for public cloud.",
+        "default": "https://cloud.octowatchdlp.com"
+      },
+      "OCTOWATCH_EMAIL": {
+        "type": "string",
+        "title": "Console email",
+        "description": "Operator email. Demo default works for try-out; use your least-privilege operator for a real tenant.",
+        "default": "demo@octowatchdlp.com"
+      },
+      "OCTOWATCH_PASSWORD": {
+        "type": "string",
+        "title": "Console password",
+        "description": "Operator password. Demo default is \"demo\". Never commit production passwords.",
+        "default": "demo"
+      }
+    },
+    "required": ["OCTOWATCH_EMAIL", "OCTOWATCH_PASSWORD"]
+  }
+}

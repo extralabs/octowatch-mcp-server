@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "octowatch": {
+      "command": "uvx",
+      "args": ["octowatch-mcp"],
+      "env": {
+        "OCTOWATCH_API_BASE": "${OCTOWATCH_API_BASE}",
+        "OCTOWATCH_EMAIL": "${OCTOWATCH_EMAIL}",
+        "OCTOWATCH_PASSWORD": "${OCTOWATCH_PASSWORD}"
+      }
+    }
+  }
+}

@@ -16,12 +16,60 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check tag matches pyproject version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PY=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
+          if [ "$TAG" != "$PY" ]; then
+            echo "Tag v$TAG does not match pyproject.toml version $PY"
+            exit 1
+          fi
+          echo "Release version=$TAG"
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
       - name: Build
         run: |
           pip install build
           python -m build
+
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Sync server.json versions from tag
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: |
+          VERSION="${VERSION#v}"
+          export VERSION
+          python - <<'PY'
+          import json, os
+          version = os.environ["VERSION"]
+          path = "server.json"
+          with open(path, encoding="utf-8") as f:
+              data = json.load(f)
+          data["version"] = version
+          for pkg in data.get("packages") or []:
+              pkg["version"] = version
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(data, f, indent=2)
+              f.write("\n")
+          print(f"server.json -> {version}")
+          PY
+
+      # PyPI index / README can lag a few seconds after Trusted Publisher upload.
+      - name: Wait for PyPI
+        run: sleep 30
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+
+      - name: Authenticate to MCP Registry (GitHub OIDC)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server to MCP Registry
+        run: ./mcp-publisher publish

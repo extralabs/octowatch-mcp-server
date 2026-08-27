@@ -21,13 +21,28 @@ Read-only [MCP](https://modelcontextprotocol.io/) server for **[OctoWatch DLP Cl
 
 Python MCP SDK **v2** (`MCPServer`). Built for SecOps and managers — open-source companion to the OctoWatch console.
 
-**Contents:** [Status](#status) · [Prerequisites](#prerequisites) · [Example questions](#example-questions) · [Security](#security--privacy) · [Limitations](#limitations) · [Quick start](#quick-start-pypi) · [Your account](#your-account-email--password) · [Tools](#core-tools) · [Configuration](#configuration) · [Documentation](#documentation) · [Contributing](#contributing)
+**Contents:** [Status](#status) · [Where to find us](#where-to-find-us) · [Prerequisites](#prerequisites) · [Example questions](#example-questions) · [Security](#security--privacy) · [Limitations](#limitations) · [Quick start](#quick-start-pypi) · [Your account](#your-account-email--password) · [Tools](#core-tools) · [Configuration](#configuration) · [Documentation](#documentation) · [Contributing](#contributing)
 
 ## Status
 
 **Alpha** (`v0.5.1`). APIs and tool shapes may change; pin a PyPI version in production configs.
 
 Tool failures return MCP `is_error` (`ToolError`). All tools advertise `read_only_hint`.
+
+## Where to find us
+
+The MCP runs **locally** (no ExtrLabs-hosted MCP). Catalogs point at PyPI / GitHub; you supply Cloud login via env.
+
+| Channel | Link |
+|---------|------|
+| PyPI | [octowatch-mcp](https://pypi.org/project/octowatch-mcp/) |
+| Official MCP Registry | [`io.github.extralabs/octowatch-mcp`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.extralabs/octowatch-mcp) |
+| GitHub | [extralabs/octowatch-mcp-server](https://github.com/extralabs/octowatch-mcp-server) |
+| Cursor Marketplace | Plugin manifest [`.cursor-plugin`](.cursor-plugin/plugin.json) — [publish form](https://cursor.com/marketplace/publish) (manual review) |
+| Directories | [Glama](https://glama.ai/) · [mcpservers.org](https://mcpservers.org/) · [mcpfind.org](https://mcpfind.org/) · [mcpmarket.com](https://mcpmarket.com/) · [PulseMCP](https://www.pulsemcp.com/) · [awesome-mcp-servers#13003](https://github.com/punkpeye/awesome-mcp-servers/pull/13003) (mcp.so skipped — paid) |
+| cursor.directory | Open Plugins: root [`.mcp.json`](.mcp.json) + [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json) — re-submit after these are on `main` |
+
+Directory / Marketplace maintainer notes: [docs/distribution.md](docs/distribution.md).
 
 ## Prerequisites
 
@@ -124,15 +139,20 @@ There is **no** single public ChatGPT JSON config we ship yet — ChatGPT / simi
 
 ## Your account (email / password)
 
-Demo is for try-out only. For **your** tenant, set:
+OctoWatch Cloud still needs a console login. The MCP does **not** store passwords for you — the host passes them as process env.
+
+| Mode | What to set |
+|------|-------------|
+| **Demo (try-out)** | Defaults / Install badges: `demo@octowatchdlp.com` / `demo` |
+| **Your tenant** | Your least-privilege operator email + password in MCP `env` (or Cursor plugin **Configure**) |
 
 | Variable | Meaning |
 |----------|---------|
 | `OCTOWATCH_EMAIL` | Console operator email |
-| `OCTOWATCH_PASSWORD` | Console password |
+| `OCTOWATCH_PASSWORD` | Console password (`isSecret` in Registry metadata) |
 | `OCTOWATCH_API_BASE` | Cloud API host if not the default public cloud |
 
-**Recommended:** put them in the MCP host JSON `env` block — [examples/cursor-mcp-pypi-with-env.json](examples/cursor-mcp-pypi-with-env.json) / [examples/claude-desktop-pypi-with-env.json](examples/claude-desktop-pypi-with-env.json).
+**Recommended:** put them in the MCP host JSON `env` block — [examples/cursor-mcp-pypi-with-env.json](examples/cursor-mcp-pypi-with-env.json) / [examples/claude-desktop-pypi-with-env.json](examples/claude-desktop-pypi-with-env.json). Cursor plugin variables: [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json).
 
 Alternatively, for a source install, copy `.env.example` → `.env` next to the process working directory.
 
@@ -207,6 +227,7 @@ Prefer `period=today|yesterday|last_7_days|last_30_days`, or `date_from` / `date
 | [docs/API.md](docs/API.md) | MCP coverage audit (not a full REST mirror) |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Common failures |
 | [docs/registry.md](docs/registry.md) | Official MCP Registry (`server.json`) |
+| [docs/distribution.md](docs/distribution.md) | Directories, Marketplace, deferred hosted channels |
 
 ### Product & console
 

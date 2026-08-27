@@ -55,16 +55,21 @@ Product links to keep current:
 
 ## Release (maintainers)
 
-Publishing to PyPI uses Trusted Publisher on a version tag. The version in `pyproject.toml` must match the tag (`0.5.1` → `v0.5.1`):
+Publishing to **PyPI** and the **official MCP Registry** is automated on a version tag. The version in `pyproject.toml` must match the tag (`0.5.1` → `v0.5.1`):
 
 ```bash
+# 1) Commit + push version bump / changelog to main
+# 2) Then:
 git tag v0.5.1
 git push origin v0.5.1
 ```
 
-Update [CHANGELOG.md](CHANGELOG.md) before tagging.
+Workflow [`.github/workflows/publish.yml`](.github/workflows/publish.yml): Trusted Publisher → PyPI, then `mcp-publisher` via GitHub OIDC. Details: [docs/registry.md](docs/registry.md).
 
-Keep [`server.json`](server.json) versions in sync with `pyproject.toml`. After the PyPI release is live (README must include the `mcp-name` HTML comment), publish metadata to the official MCP Registry — see [docs/registry.md](docs/registry.md).
+Directory / Marketplace discovery (no MCP hosting): [docs/distribution.md](docs/distribution.md). Cursor plugin files: [`.cursor-plugin/plugin.json`](.cursor-plugin/plugin.json), [`mcp.json`](mcp.json). Local plugin test: junction/symlink the repo to `~/.cursor/plugins/local/octowatch`, then **Developer: Reload Window**.
+
+Update [CHANGELOG.md](CHANGELOG.md) before tagging. Keep `<!-- mcp-name: io.github.extralabs/octowatch-mcp -->` in `README.md`.
+When shipping a Cursor Marketplace update, bump `version` in `.cursor-plugin/plugin.json` and re-submit at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
 
 ## License
 
