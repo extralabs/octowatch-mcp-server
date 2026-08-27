@@ -17,7 +17,8 @@ DEMO_EMAIL = "demo@octowatchdlp.com"
 DEMO_PASSWORD = "demo"
 DEFAULT_API_BASE = "https://cloud.octowatchdlp.com"
 
-# Tree root = all users/groups (OctoWatch UsersGroups filter body).
+# TreeviewUsers root = all users (NodeType RemoteComputer = -666666).
+# Group filter uses NodeType=14; user filter uses NodeType=1 (see filters.py).
 ROOT_FILTER = [{"NodeType": -666666, "UserID": -666666}]
 
 

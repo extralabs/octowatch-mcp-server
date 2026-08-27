@@ -14,6 +14,7 @@ RISK_SLIM_KEEP = (
     "RuleType",
     "RuleName2",
     "RuleName",
+    "RuleUserDescription",
     "Keyword",
     "ActivityObject",
     "Hidden",
