@@ -30,6 +30,8 @@ octowatch-mcp = "octowatch_mcp.server:main"
 Homepage = "https://octowatchdlp.com"
 Documentation = "https://octowatchdlp.com/docs/"
 API = "https://app.octowatchdlp.com/api/"
+Repository = "https://github.com/extralabs/octowatch-mcp-server"
+Issues = "https://github.com/extralabs/octowatch-mcp-server/issues"
 
 [build-system]
 requires = ["hatchling"]

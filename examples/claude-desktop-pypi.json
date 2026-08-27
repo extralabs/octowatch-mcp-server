@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "octowatch": {
+      "command": "octowatch-mcp",
+      "env": {
+        "OCTOWATCH_API_BASE": "https://cloud.octowatchdlp.com",
+        "OCTOWATCH_EMAIL": "demo@octowatchdlp.com",
+        "OCTOWATCH_PASSWORD": "demo"
+      }
+    }
+  }
+}

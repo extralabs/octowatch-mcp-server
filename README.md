@@ -54,7 +54,21 @@ Alpha (`v0.4.0`): read-only coverage of Cloud **console** APIs (analytics, monit
 
 ## Quick start
 
+### From PyPI
+
 ```bash
+pip install octowatch-mcp
+octowatch-mcp
+# or: python -m octowatch_mcp
+```
+
+Demo defaults work without a `.env`. For Cursor/Claude after install, merge `examples/cursor-mcp-pypi.json` or `examples/claude-desktop-pypi.json` (command `octowatch-mcp`, no repo `cwd`).
+
+### From source
+
+```bash
+git clone https://github.com/extralabs/octowatch-mcp-server.git
+cd octowatch-mcp-server
 python -m venv .venv
 # Windows:
 .venv\Scripts\activate
@@ -66,13 +80,17 @@ cp .env.example .env   # optional; demo defaults work without it
 python -m octowatch_mcp
 ```
 
-### Cursor
+Merge `examples/cursor-mcp.json` / `examples/claude-desktop.json` into MCP settings (fix `cwd` / use `python` from the venv). Restart and try: *“List OctoWatch risks for the last week.”*
 
-Merge `examples/cursor-mcp.json` into your MCP settings (fix `cwd` / use `python` from the venv). Restart Cursor and try: *“List OctoWatch risks for the last week.”*
+### Release (maintainers)
 
-### Claude Desktop
+CI runs unit tests and live demo smoke on `main`. Publishing to PyPI uses Trusted Publisher on a version tag:
 
-Same shape in `examples/claude-desktop.json` → Claude Desktop MCP config.
+```bash
+# version in pyproject.toml must match the tag (e.g. 0.4.0 → v0.4.0)
+git tag v0.4.0
+git push origin v0.4.0
+```
 
 ## Configuration
 
@@ -114,7 +132,7 @@ Coverage audit: [docs/API.md](docs/API.md).
 - [x] Correct TreeviewUsers NodeType (group=14, user=1)
 - [x] Console read-only coverage (Monitoring, Dashboard, Chrono, Account Gets)
 - [ ] Report generator queue (`Edit/QueueReportEmail`) as optional write-opt-in
-- [ ] PyPI publish + GitHub Action smoke against demo
+- [x] PyPI publish + GitHub Action smoke against demo
 - [ ] TypeScript port (optional)
 
 ## License
