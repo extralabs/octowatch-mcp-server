@@ -1,0 +1,36 @@
+---
+description: Public OSS boundary — never leak secrets or proprietary source from private OctoWatch repos
+alwaysApply: true
+---
+
+# Public OSS safety (octowatch-mcp-server)
+
+This repository is **public open source**. Anything committed or pasted into docs/examples/code here can be published.
+
+## Private sibling code (reference only)
+
+The maintainer may have local private frontend/backend checkouts. Use them only to **discover** public API contracts, request shapes, and field names.
+
+Do **not**:
+
+- Commit absolute local disk paths to those private repos
+- Vend, paste, or rewrite large chunks of their source into this repo
+- Document internal module layouts beyond what is needed for the public REST client
+
+## Never put in this repo
+
+- Production passwords, tokens, connection strings, private keys, certs, cloud keys
+- Non-public internal hosts (documented Cloud API host is OK)
+- Full proprietary modules, controllers, business rules, licensing, billing, OCR pipelines
+- Customer data dumps or raw monitoring payloads from non-demo tenants
+
+## Allowed
+
+- Public demo credentials (`demo@octowatchdlp.com` / `demo`) with clear warnings
+- Documented REST paths, headers, and JSON shapes needed for the MCP client
+- Minimal original OSS code that calls the public API
+- High-level notes in `docs/` that describe **behavior**, not internal implementation
+
+## When in doubt
+
+Prefer re-deriving from live public Help/API docs and demo responses. If a change would only make sense with private backend knowledge that competitors could abuse, leave it out or ask the user.
